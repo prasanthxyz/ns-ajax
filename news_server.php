@@ -125,34 +125,35 @@
 			<a href="addNewUser.php">Add a new User</a>
 			<?php
 			}
+
+		 ?>
+
+
+		 <!-- ----------------------------------------- Add News Item -------------------------------- -->
+		 <div name="addNewsFormDiv" id="addNewsFormDiv">
+			<form name="addNewsForm" action="news_server.php" method="POST">
+			   <fieldset>
+				  <legend>Add news item</legend>
+				  <table>
+					 <tr>
+						<td>Title</td>
+						<td><input type="text" name="newsTitle" /> </td>
+					 </tr>
+					 <tr>
+						<td>News</td>
+						<td><textarea name="newsData"></textarea> </td>
+					 </tr>
+					 <tr>
+						<td> <input type="submit" value="Add News" /> </td>
+					 </tr>
+				  </table>
+				  <input type="hidden" name="addNewsFormPosted" value="done" />
+			   </fieldset>
+			</form>
+		 </div>
+		 <?php
 		 }
 	  ?>
-
-
-	  <!-- ----------------------------------------- Add News Item -------------------------------- -->
-	  <div name="addNewsFormDiv" id="addNewsFormDiv">
-		 <form name="addNewsForm" action="news_server.php" method="POST">
-			<fieldset>
-			   <legend>Add news item</legend>
-			   <table>
-				  <tr>
-					 <td>Title</td>
-					 <td><input type="text" name="newsTitle" /> </td>
-				  </tr>
-				  <tr>
-					 <td>News</td>
-					 <td><textarea name="newsData"></textarea> </td>
-				  </tr>
-				  <tr>
-					 <td> <input type="submit" value="Add News" /> </td>
-				  </tr>
-			   </table>
-			   <input type="hidden" name="addNewsFormPosted" value="done" />
-			</fieldset>
-		 </form>
-	  </div>
-
-
 
 
 	  <!-- ------------------------------------ News Roller ---------------------------------------- -->
@@ -163,8 +164,10 @@
 			$result=mysqli_query($con, "(SELECT * FROM news ORDER BY id DESC LIMIT 50) ORDER BY id ASC");
 			while($row = mysqli_fetch_array($result))
 			{
-			   print_r($row);
-			   echo "\n";
+			   echo "<p class='timestamp'>".$row['time'].": </p>\n";
+			   echo $row['title']."<br />\n";
+			   echo $row['data'];
+			   echo "\n<br /><br />";
 			}
 			mysqli_close($con);
 		 ?>
