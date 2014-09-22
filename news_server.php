@@ -159,6 +159,14 @@
 	  <div name="showNewsDiv" id="showNewsDiv">
 		 <?php
 			//code to display news
+			$con=getConnection();
+			$result=mysqli_query($con, "(SELECT * FROM news ORDER BY id DESC LIMIT 50) ORDER BY id ASC");
+			while($row = mysqli_fetch_array($result))
+			{
+			   print_r($row);
+			   echo "\n";
+			}
+			mysqli_close($con);
 		 ?>
 	  </div>
 
